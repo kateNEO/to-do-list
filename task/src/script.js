@@ -16,24 +16,34 @@ function addTasksInHTML(){
     taskList.innerHTML = "";
     if(tasks.length > 0) {
         tasks.forEach((task, index) => {
-            createTask(task, index);
+            createTaskHTML(task, index);
         })
     }
 }
+
 addTask.addEventListener("click",  function (e){
+ getValueTaskName()
+})
+d.addEventListener("keypress", function (e){
+    if(e.key === "Enter"){
+        getValueTaskName()
+    }
+})
+function getValueTaskName(){
     let taskName = d.getElementById("input-task").value;
     tasks.push(new Task (taskName));
     pushLocaleStorage();
     d.getElementById("input-task").value = "";
     addTasksInHTML();
-})
-function createTask(task, index) {
+}
+
+function createTaskHTML(task, index) {
     let li = d.createElement('li');
     taskList.appendChild(li);
     li.id = index;
     let input = li.appendChild(d.createElement("input"));
     input.setAttribute("type", "checkbox");
-    input.checked = task.check;    //////////////////////
+    input.checked = task.check;    
     input.id = index;
     let span = li.appendChild( d.createElement("span"));
     span.setAttribute("class", "task");
